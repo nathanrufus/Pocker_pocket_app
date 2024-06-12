@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokerPocket.Data;
 
@@ -10,9 +11,10 @@ using PokerPocket.Data;
 namespace MyApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240612130130_updatetableuser6")]
+    partial class updatetableuser6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -67,35 +69,6 @@ namespace MyApp.Migrations
                     b.ToTable("ChatMessages");
                 });
 
-            modelBuilder.Entity("PokerPocket.Models.DeckModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Decks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1
-                        },
-                        new
-                        {
-                            Id = 2
-                        },
-                        new
-                        {
-                            Id = 3
-                        },
-                        new
-                        {
-                            Id = 4
-                        });
-                });
-
             modelBuilder.Entity("PokerPocket.Models.GameModel", b =>
                 {
                     b.Property<int>("GameId")
@@ -108,9 +81,6 @@ namespace MyApp.Migrations
                     b.Property<int>("CurrentPlayerIndex")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DeckId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -120,8 +90,6 @@ namespace MyApp.Migrations
 
                     b.HasKey("GameId");
 
-                    b.HasIndex("DeckId");
-
                     b.ToTable("Games");
 
                     b.HasData(
@@ -130,7 +98,6 @@ namespace MyApp.Migrations
                             GameId = 1,
                             CurrentBetAmount = 0,
                             CurrentPlayerIndex = 0,
-                            DeckId = 1,
                             Name = "HOLD EM",
                             Pot = 0
                         },
@@ -139,7 +106,6 @@ namespace MyApp.Migrations
                             GameId = 2,
                             CurrentBetAmount = 0,
                             CurrentPlayerIndex = 0,
-                            DeckId = 2,
                             Name = "OMAHA",
                             Pot = 0
                         },
@@ -148,7 +114,6 @@ namespace MyApp.Migrations
                             GameId = 3,
                             CurrentBetAmount = 0,
                             CurrentPlayerIndex = 0,
-                            DeckId = 3,
                             Name = "TOURNAMENT",
                             Pot = 0
                         },
@@ -157,7 +122,6 @@ namespace MyApp.Migrations
                             GameId = 4,
                             CurrentBetAmount = 0,
                             CurrentPlayerIndex = 0,
-                            DeckId = 4,
                             Name = "FREE ROLL",
                             Pot = 0
                         });
@@ -203,10 +167,6 @@ namespace MyApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PictureUrl")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -225,17 +185,6 @@ namespace MyApp.Migrations
                     b.HasOne("PokerPocket.Models.PlayerModel", null)
                         .WithMany("Cards")
                         .HasForeignKey("PlayerModelPlayerId");
-                });
-
-            modelBuilder.Entity("PokerPocket.Models.GameModel", b =>
-                {
-                    b.HasOne("PokerPocket.Models.DeckModel", "Deck")
-                        .WithMany()
-                        .HasForeignKey("DeckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Deck");
                 });
 
             modelBuilder.Entity("PokerPocket.Models.PlayerModel", b =>

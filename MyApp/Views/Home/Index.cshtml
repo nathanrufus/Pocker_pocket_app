@@ -2,8 +2,66 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Welcome to Poker Pocket!</h1>
-<p>
-    <a href="/Game">Play a Game</a> |
-    <a href="/Tournament">Join a Tournament</a>
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-color: #2e2e2e; /* Dark background color */
+            color: #ffffff; /* Light text color for contrast */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        a {
+            color: #1e90ff; /* Light blue link color */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            flex: 1;
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Poker Pocket!</h1>
+        <p>
+            Poker Pocket is your go-to platform for playing exciting poker games online. Whether you're a seasoned pro or just starting out, we have a game for you. Our platform offers a variety of poker formats including Texas Hold'em, Omaha, and more. You can join a casual game with friends or compete in high-stakes tournaments for a chance to win big.
+        </p>
+        <p>
+            Before you start playing, please <a href="/Account/Login">log in</a> to your account. If you don't have an account yet, you can <a href="/Account/Register">sign up here</a>. Logging in allows us to save your progress, track your achievements, and provide you with a personalized gaming experience.
+        </p>
+        <p>
+            Ready to play? Choose one of the options below to get started:
+        </p>
+        <p>
+            <a href="/Game">Play a Game</a> |
+            <a href="/Tournament">Join a Tournament</a>
+        </p>
+    </div>
+</body>
+</html>

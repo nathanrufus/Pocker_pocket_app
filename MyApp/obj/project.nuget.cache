@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GXnw+qux9csCjwYb/uPmz9//jMaXxynXOXiVMCzzo+yBhfibdJ2dv3O9z5FlkDyQm3o5I9Ifyr6IcuxMA9WXhw==",
+  "dgSpecHash": "bwgsXpbUSnUejJlYiEhNcaEiEeCeVMzwqwOFw37YotBIWEqaRp4TLasuedxaLNGBTtGw7ETfke0MDdirmRiHcw==",
   "success": true,
-  "projectFilePath": "/home/nathan/Documents/Pocker_pocket_app/MyApp/MyApp.csproj",
+  "projectFilePath": "/home/nathan/Documents/Freelance/Pocker_pocket_app/MyApp/MyApp.csproj",
   "expectedPackageFiles": [
     "/home/nathan/.nuget/packages/bcrypt.net-next/4.0.2/bcrypt.net-next.4.0.2.nupkg.sha512",
     "/home/nathan/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",

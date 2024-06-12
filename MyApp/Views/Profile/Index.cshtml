@@ -1,0 +1,37 @@
+@model PokerPocket.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h1>Edit Profile</h1>
+
+<div class="container">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="avatar">Avatar</label>
+            <input type="file" class="form-control" id="avatar" name="avatar" />
+            @if (!string.IsNullOrEmpty(Model.PictureUrl))
+            {
+                <div>
+                    <img src="@Model.PictureUrl" alt="Avatar" class="img-thumbnail" style="max-width: 200px;" />
+                </div>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

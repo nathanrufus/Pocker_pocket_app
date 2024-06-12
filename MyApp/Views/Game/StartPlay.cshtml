@@ -1,127 +1,119 @@
-@using PokerPocket.Models
-@model GameModel
+@model PokerPocket.Models.GameModel
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Game: @Model.Name</title>
+    <title>@Model.Name</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .player-card, .community-card {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
         .card {
             width: 100px;
             height: 150px;
-            background-color: #ffffff;
-            border: 1px solid #000000;
-            border-radius: 10px;
-            margin: 10px;
+            margin: 5px;
             display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
-        .card-content {
+        .card .card-body {
             text-align: center;
-            padding-top: 40px;
+        }
+        .card .card-rank {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .card .card-suit {
+            font-size: 24px;
         }
         .actions {
             margin-top: 20px;
         }
-        .action-btn {
-            margin-right: 10px;
-        }
-        /* Add suit colors */
-        .heart {
-            color: red;
-        }
-        .diamond {
-            color: red;
-        }
-        .club {
-            color: black;
-        }
-        .spade {
-            color: black;
+        #betAmount {
+            width: 150px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Game: @Model.Name</h1>
+        <h1 class="text-center">Poker Game: @Model.Name</h1>
 
-        <h2>Players</h2>
-        <div class="row">
-            @foreach (var player in Model.Players)
-            {
-                <div class="col-md-4">
-                    <h4>@player.Name</h4>
-                    <div class="card">
-                        <div class="card-content">
-                            @foreach (var card in player.Cards)
-                            {
-                                <div class="@GetCardClass(card.Suit)">
-                                    <span>@card.Rank</span>
-                                    <span>@GetSuitSymbol(card.Suit)</span>
-                                </div>
-                            }
+        <div class="community-card">
+            <h3>Community Cards:</h3>
+            <div class="card-container">
+                @if (Model.CommunityCards != null)
+                {
+                    foreach (var card in Model.CommunityCards)
+                    {
+                        <div class="card @card.Suit.ToLower()">
+                            <div class="card-body">
+                                <p class="card-rank">@card.Rank</p>
+                                <p class="card-suit">@card.Suit</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="player-card">
+            @* <h4>@Model.GetCurrentPlayer().Name's Hand:</h4> *@
+            <div class="card-container">
+                @if (Model.GetCurrentPlayer() != null && Model.GetCurrentPlayer().Cards != null)
+                {
+                    foreach (var card in Model.GetCurrentPlayer().Cards)
+                    {
+                        <div class="card @card.Suit.ToLower()">
+                            <div class="card-body">
+                                <p class="card-rank">@card.Rank</p>
+                                <p class="card-suit">@card.Suit</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            @if (Model.GetCurrentPlayer() != null)
+            {
+                <h4>Bet Amount: @Model.GetCurrentPlayer().BetAmount</h4>
+                <h4>Balance: @Model.GetCurrentPlayer().Balance</h4>
             }
         </div>
 
-        <h2>Actions</h2>
-        <div class="actions">
-            <form asp-action="Fold" method="post" class="action-form">
-                <input type="hidden" name="gameId" value="@Model.GameId" />
-                <input type="hidden" name="playerId" value="@Model.Players[0].PlayerId" />
-                <button type="submit" class="btn btn-danger action-btn">Fold</button>
+        <div class="actions text-center">
+            <form id="betForm" asp-action="PlaceBet" method="post">
+                <div class="form-group">
+                    <input type="number" class="form-control" id="betAmount" name="amount" placeholder="Enter Bet Amount">
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Place Bet</button>
             </form>
-            <form asp-action="Check" method="post" class="action-form">
-                <input type="hidden" name="gameId" value="@Model.GameId" />
-                <input type="hidden" name="playerId" value="@Model.Players[0].PlayerId" />
-                <button type="submit" class="btn btn-secondary action-btn">Check</button>
-            </form>
-            <form asp-action="Call" method="post" class="action-form">
-                <input type="hidden" name="gameId" value="@Model.GameId" />
-                <input type="hidden" name="playerId" value="@Model.Players[0].PlayerId" />
-                <button type="submit" class="btn btn-success action-btn">Call</button>
+            <form asp-action="Deal" method="post">
+                <button type="submit" class="btn btn-secondary mt-2">Deal New Cards</button>
             </form>
         </div>
+
+        <div class="instructions text-center mt-5">
+            <h4>Instructions:</h4>
+            <p>
+                This is a simplified version of Poker. Each player is dealt two cards, and five community cards are dealt.
+                Players take turns to place bets. Click "Deal New Cards" to start a new round.
+            </p>
+        </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-@functions {
-    // Function to get the suit symbol based on the suit name
-    public string GetSuitSymbol(string suit)
-    {
-        switch (suit)
-        {
-            case "Hearts":
-                return "&hearts;";
-            case "Diamonds":
-                return "&diams;";
-            case "Clubs":
-                return "&clubs;";
-            case "Spades":
-                return "&spades;";
-            default:
-                return "";
-        }
-    }
-
-    // Function to get the card class based on the suit name
-    public string GetCardClass(string suit)
-    {
-        switch (suit)
-        {
-            case "Hearts":
-                return "card heart";
-            case "Diamonds":
-                return "card diamond";
-            case "Clubs":
-                return "card club";
-            case "Spades":
-                return "card spade";
-            default:
-                return "";
-        }
-    }
-}

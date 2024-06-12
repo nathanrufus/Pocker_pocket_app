@@ -13,6 +13,7 @@ namespace PokerPocket.Data
         public DbSet<GameModel> Games { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
         public DbSet<PlayerModel> Players { get; set; }
+        public DbSet<DeckModel> Decks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -32,13 +33,23 @@ namespace PokerPocket.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seed initial data
-            modelBuilder.Entity<GameModel>().HasData(
-                new GameModel { GameId = 1, Name = "HOLD EM" },
-                new GameModel { GameId = 2, Name = "OMAHA" },
-                new GameModel { GameId = 3, Name = "TOURNAMENT" },
-                new GameModel { GameId = 4, Name = "FREE ROLL" }
+            // Seed initial Decks
+            modelBuilder.Entity<DeckModel>().HasData(
+                new DeckModel { Id = 1 },
+                new DeckModel { Id = 2 },
+                new DeckModel { Id = 3 },
+                new DeckModel { Id = 4 }
             );
+
+            // Seed initial Games
+            modelBuilder.Entity<GameModel>().HasData(
+                new GameModel { GameId = 1, Name = "HOLD EM", DeckId = 1 },
+                new GameModel { GameId = 2, Name = "OMAHA", DeckId = 2 },
+                new GameModel { GameId = 3, Name = "TOURNAMENT", DeckId = 3 },
+                new GameModel { GameId = 4, Name = "FREE ROLL", DeckId = 4 }
+            );
+
+            modelBuilder.Entity<DeckModel>().HasKey(d => d.Id);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
