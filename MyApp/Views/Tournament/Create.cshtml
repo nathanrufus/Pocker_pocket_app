@@ -1,0 +1,15 @@
+@model PokerPocket.Models.TournamentModel
+
+@{
+    ViewData["Title"] = "Create Tournament";
+}
+
+<h1>Create Tournament</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <button type="submit">Create</button>
+</form>

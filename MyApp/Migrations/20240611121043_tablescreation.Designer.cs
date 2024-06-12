@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokerPocket.Data;
 
@@ -10,9 +11,10 @@ using PokerPocket.Data;
 namespace MyApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240611121043_tablescreation")]
+    partial class tablescreation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
@@ -75,28 +77,6 @@ namespace MyApp.Migrations
                     b.HasKey("GameId");
 
                     b.ToTable("Games");
-
-                    b.HasData(
-                        new
-                        {
-                            GameId = 1,
-                            Name = "HOLD EM"
-                        },
-                        new
-                        {
-                            GameId = 2,
-                            Name = "OMAHA"
-                        },
-                        new
-                        {
-                            GameId = 3,
-                            Name = "TOURNAMENT"
-                        },
-                        new
-                        {
-                            GameId = 4,
-                            Name = "FREE ROLL"
-                        });
                 });
 
             modelBuilder.Entity("PokerPocket.Models.PlayerModel", b =>

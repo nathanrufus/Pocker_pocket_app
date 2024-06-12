@@ -1,7 +1,7 @@
 // UserService.cs
 using Microsoft.EntityFrameworkCore;
 using PokerPocket.Data;
-using PokerPocket.Data.Entities;
+using PokerPocket.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

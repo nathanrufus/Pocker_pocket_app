@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using PokerPocket.Models;
 using PokerPocket.Services;
 using System.Threading.Tasks;
-using PokerPocket.Data.Entities; // Ensure this is included
 
 namespace PokerPocket.Controllers
 {
@@ -33,7 +32,7 @@ namespace PokerPocket.Controllers
                 };
 
                 await _userService.Register(user, model.Password);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
             return View(model);
         }

@@ -1,0 +1,127 @@
+@using PokerPocket.Models
+@model GameModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game: @Model.Name</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 10px;
+            margin: 10px;
+            display: inline-block;
+        }
+        .card-content {
+            text-align: center;
+            padding-top: 40px;
+        }
+        .actions {
+            margin-top: 20px;
+        }
+        .action-btn {
+            margin-right: 10px;
+        }
+        /* Add suit colors */
+        .heart {
+            color: red;
+        }
+        .diamond {
+            color: red;
+        }
+        .club {
+            color: black;
+        }
+        .spade {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Game: @Model.Name</h1>
+
+        <h2>Players</h2>
+        <div class="row">
+            @foreach (var player in Model.Players)
+            {
+                <div class="col-md-4">
+                    <h4>@player.Name</h4>
+                    <div class="card">
+                        <div class="card-content">
+                            @foreach (var card in player.Cards)
+                            {
+                                <div class="@GetCardClass(card.Suit)">
+                                    <span>@card.Rank</span>
+                                    <span>@GetSuitSymbol(card.Suit)</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <h2>Actions</h2>
+        <div class="actions">
+            <form asp-action="Fold" method="post" class="action-form">
+                <input type="hidden" name="gameId" value="@Model.GameId" />
+                <input type="hidden" name="playerId" value="@Model.Players[0].PlayerId" />
+                <button type="submit" class="btn btn-danger action-btn">Fold</button>
+            </form>
+            <form asp-action="Check" method="post" class="action-form">
+                <input type="hidden" name="gameId" value="@Model.GameId" />
+                <input type="hidden" name="playerId" value="@Model.Players[0].PlayerId" />
+                <button type="submit" class="btn btn-secondary action-btn">Check</button>
+            </form>
+            <form asp-action="Call" method="post" class="action-form">
+                <input type="hidden" name="gameId" value="@Model.GameId" />
+                <input type="hidden" name="playerId" value="@Model.Players[0].PlayerId" />
+                <button type="submit" class="btn btn-success action-btn">Call</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+@functions {
+    // Function to get the suit symbol based on the suit name
+    public string GetSuitSymbol(string suit)
+    {
+        switch (suit)
+        {
+            case "Hearts":
+                return "&hearts;";
+            case "Diamonds":
+                return "&diams;";
+            case "Clubs":
+                return "&clubs;";
+            case "Spades":
+                return "&spades;";
+            default:
+                return "";
+        }
+    }
+
+    // Function to get the card class based on the suit name
+    public string GetCardClass(string suit)
+    {
+        switch (suit)
+        {
+            case "Hearts":
+                return "card heart";
+            case "Diamonds":
+                return "card diamond";
+            case "Clubs":
+                return "card club";
+            case "Spades":
+                return "card spade";
+            default:
+                return "";
+        }
+    }
+}

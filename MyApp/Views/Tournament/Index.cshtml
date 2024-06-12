@@ -1,0 +1,31 @@
+@model IEnumerable<PokerPocket.Models.TournamentModel>
+
+@{
+    ViewData["Title"] = "Tournaments";
+}
+
+<h1>Tournaments</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Tournament ID</th>
+            <th>Tournament Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tournament in Model)
+        {
+            <tr>
+                <td>@tournament.TournamentId</td>
+                <td>@tournament.Name</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@tournament.TournamentId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create">Create New Tournament</a>

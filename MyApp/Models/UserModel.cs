@@ -1,5 +1,6 @@
-// User.cs
-namespace PokerPocket.Data.Entities
+using System.ComponentModel.DataAnnotations;
+
+namespace PokerPocket.Models
 {
     public class User
     {

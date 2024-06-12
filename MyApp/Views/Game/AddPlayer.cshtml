@@ -1,0 +1,22 @@
+@model PlayerModel
+@using PokerPocket.Models
+@using PokerPocket.Services.Interfaces // Add this line to import the namespace
+
+
+@{
+    ViewData["Title"] = "Play Game";
+}
+
+<h1>Add Player</h1>
+
+<form asp-action="AddPlayer" method="post">
+    <input type="hidden" name="gameId" value="@ViewBag.GameId" />
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add Player" class="btn btn-primary" />
+    </div>
+</form>

@@ -1,5 +1,5 @@
 // IUserService.cs
-using PokerPocket.Data.Entities;
+using PokerPocket.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

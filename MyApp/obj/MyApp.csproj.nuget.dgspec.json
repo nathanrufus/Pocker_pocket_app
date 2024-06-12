@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/nathan/Documents/Freelance/Pocker_pocket_app/MyApp/MyApp.csproj": {}
+    "/home/nathan/Documents/Pocker_pocket_app/MyApp/MyApp.csproj": {}
   },
   "projects": {
-    "/home/nathan/Documents/Freelance/Pocker_pocket_app/MyApp/MyApp.csproj": {
+    "/home/nathan/Documents/Pocker_pocket_app/MyApp/MyApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/nathan/Documents/Freelance/Pocker_pocket_app/MyApp/MyApp.csproj",
+        "projectUniqueName": "/home/nathan/Documents/Pocker_pocket_app/MyApp/MyApp.csproj",
         "projectName": "MyApp",
-        "projectPath": "/home/nathan/Documents/Freelance/Pocker_pocket_app/MyApp/MyApp.csproj",
+        "projectPath": "/home/nathan/Documents/Pocker_pocket_app/MyApp/MyApp.csproj",
         "packagesPath": "/home/nathan/.nuget/packages/",
-        "outputPath": "/home/nathan/Documents/Freelance/Pocker_pocket_app/MyApp/obj/",
+        "outputPath": "/home/nathan/Documents/Pocker_pocket_app/MyApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/nathan/.nuget/NuGet/NuGet.Config"
